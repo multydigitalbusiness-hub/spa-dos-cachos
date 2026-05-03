@@ -1,0 +1,778 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Spa dos Cachos — Especialista em Crespos, Ondulados e Cacheados
+    </title>
+
+    <!-- SEO & Social Sharing -->
+    <meta
+      name="description"
+      content="Spa dos Cachos — Salão de beleza especialista em cabelos crespos, ondulados e cacheados. Tratamentos exclusivos para realçar a beleza natural dos seus cachos."
+    />
+    <meta property="og:title" content="Spa dos Cachos — Salão Especialista" />
+    <meta
+      property="og:description"
+      content="Seu cabelo merece cuidado especial. Tratamentos exclusivos para crespos, ondulados e cacheados."
+    />
+    <meta property="og:image" content="profile.png" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Google Fonts: Playfair Display + Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- FontAwesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      :root {
+        --primary: #c2185b;
+        --primary-light: #e91e80;
+        --accent: #f8bbd0;
+        --accent-gold: #d4a574;
+        --dark-bg: #080305;
+        --glass-bg: rgba(255, 255, 255, 0.06);
+        --glass-border: rgba(194, 24, 91, 0.25);
+        --glass-highlight: rgba(248, 187, 208, 0.15);
+        --text-main: #fff5f8;
+        --text-muted: #d4a0b0;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--dark-bg);
+        color: var(--text-main);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        overflow-x: hidden;
+        padding: 2rem 1rem;
+      }
+
+      /* Background with CSS gradient (no image needed) */
+      .bg-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background:
+          radial-gradient(
+            ellipse at 20% 50%,
+            rgba(194, 24, 91, 0.08) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse at 80% 20%,
+            rgba(212, 165, 116, 0.05) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse at 50% 80%,
+            rgba(248, 187, 208, 0.04) 0%,
+            transparent 50%
+          ),
+          linear-gradient(135deg, #080305 0%, #15080f 50%, #080305 100%);
+      }
+
+      .bg-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          rgba(8, 3, 5, 0.85) 0%,
+          rgba(194, 24, 91, 0.05) 100%
+        );
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
+      }
+
+      /* Floating particles */
+      .bg-container::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image:
+          radial-gradient(
+            2px 2px at 10% 30%,
+            rgba(248, 187, 208, 0.3),
+            transparent
+          ),
+          radial-gradient(
+            2px 2px at 90% 70%,
+            rgba(212, 165, 116, 0.2),
+            transparent
+          ),
+          radial-gradient(
+            1px 1px at 50% 50%,
+            rgba(248, 187, 208, 0.2),
+            transparent
+          ),
+          radial-gradient(
+            1px 1px at 30% 80%,
+            rgba(212, 165, 116, 0.15),
+            transparent
+          ),
+          radial-gradient(
+            2px 2px at 70% 20%,
+            rgba(194, 24, 91, 0.2),
+            transparent
+          );
+        animation: floatParticles 20s ease-in-out infinite;
+      }
+
+      @keyframes floatParticles {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(1deg);
+        }
+      }
+
+      /* Glassmorphism Container */
+      .glass-card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: 24px;
+        padding: 2.5rem 1.5rem;
+        width: 100%;
+        max-width: 420px;
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        box-shadow:
+          0 30px 60px rgba(0, 0, 0, 0.4),
+          inset 0 1px 0 var(--glass-highlight);
+        animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        opacity: 0;
+        transform: translateY(20px);
+        position: relative;
+        overflow: hidden;
+        transform-style: preserve-3d;
+        perspective: 1000px;
+      }
+
+      .glass-card::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(194, 24, 91, 0.08) 0%,
+          transparent 60%
+        );
+        z-index: -1;
+        pointer-events: none;
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Profile Section */
+      .profile {
+        text-align: center;
+        margin-bottom: 2rem;
+        transform: translateZ(30px);
+      }
+
+      .profile-img-container {
+        position: relative;
+        width: 180px;
+        height: 180px;
+        margin: 0 auto 1.2rem;
+        border-radius: 50%;
+        padding: 4px;
+        background: linear-gradient(135deg, var(--primary), var(--accent-gold));
+        box-shadow: 0 0 25px rgba(194, 24, 91, 0.4);
+      }
+
+      .profile-img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid var(--dark-bg);
+      }
+
+      .profile-status {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        width: 18px;
+        height: 18px;
+        background-color: #4caf50;
+        border-radius: 50%;
+        border: 3px solid var(--dark-bg);
+        box-shadow: 0 0 10px rgba(76, 175, 80, 0.6);
+      }
+
+      .profile h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.3rem;
+        letter-spacing: -0.5px;
+        line-height: 1.1;
+        color: #fff;
+      }
+
+      .profile h2 {
+        font-size: 0.8rem;
+        color: var(--accent);
+        font-weight: 500;
+        margin-bottom: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .profile p {
+        font-size: 0.95rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+        font-weight: 300;
+      }
+
+      /* Action Buttons Grid */
+      .action-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        transform: translateZ(20px);
+      }
+
+      .action-btn {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: var(--text-main);
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .action-btn::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(rgba(255, 255, 255, 0.1), transparent);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .action-btn:hover {
+        transform: translateY(-5px) scale(1.02);
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(194, 24, 91, 0.4);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .action-btn:hover::after {
+        opacity: 1;
+      }
+
+      .action-btn i {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .btn-whatsapp i {
+        color: #25d366;
+      }
+      .btn-location i {
+        color: #ea4335;
+      }
+      .btn-instagram i {
+        color: #e1306c;
+      }
+      .btn-contact i {
+        color: var(--accent-gold);
+      }
+
+      .action-btn span {
+        font-size: 0.85rem;
+        font-weight: 500;
+      }
+
+      /* Main CTA Button */
+      .cta-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 1.2rem;
+        background: linear-gradient(135deg, var(--primary) 0%, #8e1249 100%);
+        color: #fff;
+        text-decoration: none;
+        border-radius: 16px;
+        font-weight: 700;
+        font-size: 1.05rem;
+        letter-spacing: 0.5px;
+        margin-bottom: 2rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 25px rgba(194, 24, 91, 0.4);
+        border: none;
+        position: relative;
+        overflow: hidden;
+        transform: translateZ(25px);
+      }
+
+      .cta-btn i {
+        margin-right: 10px;
+        font-size: 1.2rem;
+      }
+
+      .cta-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: all 0.6s ease;
+      }
+
+      .cta-btn:hover {
+        transform: translateY(-3px) translateZ(25px);
+        box-shadow: 0 12px 30px rgba(194, 24, 91, 0.6);
+        background: linear-gradient(
+          135deg,
+          var(--primary-light) 0%,
+          var(--primary) 100%
+        );
+      }
+
+      .cta-btn:hover::before {
+        left: 100%;
+      }
+
+      /* Featured Service */
+      .featured-service {
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
+        overflow: hidden;
+        margin-bottom: 2rem;
+        position: relative;
+        transform: translateZ(15px);
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .featured-img-wrapper {
+        position: relative;
+        height: 253px;
+        overflow: hidden;
+        background: linear-gradient(
+          135deg,
+          rgba(194, 24, 91, 0.3),
+          rgba(212, 165, 116, 0.2)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .featured-img-wrapper .featured-icon {
+        font-size: 3rem;
+        color: var(--accent);
+        opacity: 0.6;
+      }
+
+      .featured-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .featured-service:hover .featured-img {
+        transform: scale(1.05);
+      }
+
+      .featured-badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: linear-gradient(135deg, var(--primary), var(--accent-gold));
+        color: #fff;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 2px 10px rgba(194, 24, 91, 0.3);
+        z-index: 10;
+      }
+
+      .featured-content {
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .featured-text h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.05rem;
+        font-weight: 600;
+        margin-bottom: 0.2rem;
+      }
+
+      .featured-text p {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+      }
+
+      .featured-action {
+        background: rgba(194, 24, 91, 0.2);
+        color: var(--text-main);
+        border: none;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .featured-service:hover .featured-action {
+        background: var(--primary);
+        transform: translateX(3px);
+        box-shadow: 0 0 15px rgba(194, 24, 91, 0.5);
+      }
+
+      /* Footer */
+      .footer {
+        text-align: center;
+        padding-top: 1rem;
+        border-top: 1px solid var(--glass-border);
+        transform: translateZ(10px);
+      }
+
+      .copyright {
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.3);
+      }
+
+      .dev-credit {
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        opacity: 1;
+      }
+
+      .dev-credit span {
+        font-size: 0.65rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        opacity: 0.8;
+      }
+
+      .dev-logo {
+        height: 48px;
+        width: auto;
+        object-fit: contain;
+      }
+
+      /* Mobile Optimization */
+      @media (max-width: 400px) {
+        .glass-card {
+          padding: 2rem 1rem;
+        }
+        .profile h1 {
+          font-size: 1.7rem;
+        }
+        .action-grid {
+          gap: 0.8rem;
+        }
+      }
+
+      /* Ripple Animation */
+      .click-ripple {
+        position: absolute;
+        border-radius: 50%;
+        transform: scale(0);
+        animation: ripple 0.6s linear;
+        background-color: rgba(248, 187, 208, 0.3);
+        pointer-events: none;
+      }
+
+      @keyframes ripple {
+        to {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Background -->
+    <div class="bg-container"></div>
+    <div class="bg-overlay"></div>
+
+    <!-- Main Card -->
+    <main class="glass-card" id="card3d">
+      <!-- Profile Section -->
+      <section class="profile">
+        <div class="profile-img-container">
+          <img
+            src="profile.png"
+            alt="Logo Spa dos Cachos"
+            class="profile-img"
+            fetchpriority="high"
+          />
+          <div class="profile-status" title="Atendimento Online"></div>
+        </div>
+        <h1>Spa Cachos Terapia</h1>
+        <h2>Especialista em Crespos, Ondulados e Cacheados</h2>
+        <p>
+          Seu cabelo merece cuidado especial. Tratamentos exclusivos para
+          realçar a beleza natural dos seus cachos. ✨
+        </p>
+      </section>
+
+      <!-- Main CTA: Avaliação no Google -->
+      <a
+        href="https://g.page/r/CVU9YQjLa86kEBM/review"
+        class="cta-btn"
+        target="_blank"
+        rel="noopener"
+        aria-label="Avaliar no Google"
+      >
+        <i class="fab fa-google"></i> AVALIE-NOS NO GOOGLE
+      </a>
+
+      <!-- Action Grid -->
+      <nav class="action-grid" aria-label="Ações de contato">
+        <a
+          href="https://wa.me/556193747373?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20serviços%20💆‍♀️"
+          class="action-btn btn-whatsapp"
+          target="_blank"
+          rel="noopener"
+          aria-label="Contato via WhatsApp"
+        >
+          <i class="fab fa-whatsapp"></i>
+          <span>WhatsApp</span>
+        </a>
+        <a
+          href="javascript:void(0)"
+          onclick="downloadVCard()"
+          class="action-btn btn-contact"
+          aria-label="Salvar contato"
+        >
+          <i class="fas fa-user-plus"></i>
+          <span>Salvar Contato</span>
+        </a>
+        <a
+          href="https://www.instagram.com/cachosterapia_planaltinadf?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+          class="action-btn btn-instagram"
+          target="_blank"
+          rel="noopener"
+          aria-label="Acessar Instagram"
+        >
+          <i class="fab fa-instagram"></i>
+          <span>Instagram</span>
+        </a>
+        <a
+          href="https://maps.app.goo.gl/Mc34CazsgUEPPb4q9"
+          class="action-btn btn-location"
+          target="_blank"
+          rel="noopener"
+          aria-label="Ver localização no Maps"
+        >
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Localização</span>
+        </a>
+      </nav>
+
+      <!-- Featured Service -->
+      <article
+        class="featured-service"
+        onclick="
+          window.open(
+            'https://wa.me/556193747373?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20a%20Hidratação%20Profunda%20para%20Cachos%20💧',
+            '_blank',
+          )
+        "
+      >
+        <div class="featured-img-wrapper">
+          <div class="featured-badge">Serviço mais procurado</div>
+          <img
+            src="service.png"
+            alt="Hidratação Profunda"
+            class="featured-img"
+            loading="lazy"
+          />
+        </div>
+        <div class="featured-content">
+          <div class="featured-text">
+            <h3>Hidratação Profunda</h3>
+            <p>Cachos definidos e hidratados ✨</p>
+          </div>
+          <button class="featured-action" aria-label="Ver detalhes">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </article>
+
+      <!-- Spacer or remove secondary button area -->
+
+      <!-- Footer -->
+      <footer class="footer">
+        <p class="copyright">
+          &copy; <span id="year"></span> Spa dos Cachos. Todos os direitos
+          reservados.
+        </p>
+        <div class="dev-credit">
+          <span>Desenvolvida pela</span>
+          <img
+            src="logoMulty.webp"
+            alt="Multy Logo"
+            class="dev-logo"
+            loading="lazy"
+          />
+        </div>
+      </footer>
+    </main>
+
+    <!-- JavaScript -->
+    <script>
+      // Year
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // vCard Download
+      function downloadVCard() {
+        const vcardData = `BEGIN:VCARD
+VERSION:3.0
+FN:Spa dos Cachos
+ORG:Spa dos Cachos
+TEL;TYPE=CELL,VOICE;VALUE=uri:tel:+556193747373
+URL:https://www.instagram.com/cachosterapia_planaltinadf
+NOTE:Especialista em cabelos crespos, ondulados e cacheados
+END:VCARD`;
+        const blob = new Blob([vcardData], {
+          type: "text/vcard;charset=utf-8",
+        });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.style.display = "none";
+        a.href = url;
+        a.download = "Spa_dos_Cachos.vcf";
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(() => {
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(url);
+        }, 100);
+      }
+
+      // Ripple Effect
+      function createRipple(event) {
+        const button = event.currentTarget;
+        const circle = document.createElement("span");
+        const diameter = Math.max(button.clientWidth, button.clientHeight);
+        const radius = diameter / 2;
+        const rect = button.getBoundingClientRect();
+
+        circle.style.width = circle.style.height = `${diameter}px`;
+        circle.style.left = `${event.clientX - rect.left - radius}px`;
+        circle.style.top = `${event.clientY - rect.top - radius}px`;
+        circle.classList.add("click-ripple");
+
+        const existingRipple = button.querySelector(".click-ripple");
+        if (existingRipple) existingRipple.remove();
+        button.appendChild(circle);
+      }
+
+      document
+        .querySelectorAll(".action-btn, .cta-btn, .featured-service")
+        .forEach((button) => {
+          button.addEventListener("mousedown", createRipple);
+        });
+
+      // 3D Tilt
+      const card = document.getElementById("card3d");
+      let tiltRequest = null;
+
+      if (window.matchMedia("(hover: hover)").matches) {
+        document.addEventListener("mousemove", (e) => {
+          if (tiltRequest) cancelAnimationFrame(tiltRequest);
+          tiltRequest = requestAnimationFrame(() => {
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 40;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 40;
+            card.style.transform = `perspective(1000px) rotateY(${-xAxis}deg) rotateX(${yAxis}deg)`;
+          });
+        });
+
+        document.addEventListener("mouseleave", () => {
+          if (tiltRequest) cancelAnimationFrame(tiltRequest);
+          card.style.transition = "transform 0.5s ease";
+          card.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg)`;
+          setTimeout(() => (card.style.transition = ""), 500);
+        });
+
+        document.addEventListener("mouseenter", () => {
+          card.style.transition = "transform 0.2s ease";
+          setTimeout(() => (card.style.transition = ""), 200);
+        });
+      }
+    </script>
+  </body>
+</html>
